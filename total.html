@@ -50,6 +50,7 @@
     <div class="card">
       <h2>Current pepper</h2>
       <div style="font-size:36px;font-weight:900;margin-top:8px" id="pepperName">—</div>
+      <div style="margin-top:8px;font-size:14px;color:rgba(255,255,255,0.7)" id="pepperDescription">—</div>
       <div class="muted" style="margin-top:6px">
         Scoville: <b id="scoville">—</b>
       </div>
@@ -84,21 +85,21 @@
 
   // Your exact ladder (min donation thresholds in AUD)
   const LADDER = [
-    { name: "Capsicum", scoville: 0, min: 0 },
-    { name: "Jalapeno", scoville: 5000, min: 5 },
-    { name: "Chipotle Pepper", scoville: 10000, min: 10 },
-    { name: "Serrano Pepper", scoville: 23000, min: 23 },
-    { name: "Cayenne Pepper", scoville: 50000, min: 50 },
-    { name: "Birds Eye Chilli", scoville: 100000, min: 100 },
-    { name: "Jamaican Hot Pepper", scoville: 200000, min: 200 },
-    { name: "Habanero", scoville: 350000, min: 350 },
-    { name: "Chocolate Habanero", scoville: 450000, min: 450 },
-    { name: "Red Savina Habanero", scoville: 577000, min: 577 },
-    { name: "Black Naga", scoville: 700000, min: 700 },
-    { name: "Trinidad 7 Pod", scoville: 850000, min: 850 },
-    { name: "Ghost Pepper", scoville: 1000000, min: 1000 },
-    { name: "Carolina reaper", scoville: 1500000, min: 1500 },
-    { name: "Brown Moruga Scorpion", scoville: 2000000, min: 2000 }
+    { name: "Capsicum", scoville: 0, min: 0, description: "Sweet and mild fruit, otherwise known as bell pepper." },
+    { name: "Jalapeno", scoville: 5000, min: 5, description: "Classic Mexican pepper with moderate heat and great flavour." },
+    { name: "Chipotle Pepper", scoville: 10000, min: 10, description: "Smoked jalapeno with a relatively mild but earthy spiciness." },
+    { name: "Serrano Pepper", scoville: 23000, min: 23, description: "Small but mighty Mexican pepper with a bright and biting flavour." },
+    { name: "Cayenne Pepper", scoville: 50000, min: 50, description: "Long, thin pepper known for its heat and spice." },
+    { name: "Birds Eye Chilli", scoville: 100000, min: 100, description: "Tiny Southeast Asian pepper packed with explosive heat and fruity notes." },
+    { name: "Jamaican Hot Pepper", scoville: 200000, min: 200, description: "Stout Caribbean powerhouse with intense heat and sweetness." },
+    { name: "Habanero", scoville: 350000, min: 350, description: "Mexican pepper known for its intensely spicy and floral flavour." },
+    { name: "Chocolate Habanero", scoville: 450000, min: 450, description: "Dark brown habanero bred to be even spicier then its derivative." },
+    { name: "Red Savina Habanero", scoville: 577000, min: 577, description: "Extremely hot breed of habenero; the hottest chilli in the world until 2006." },
+    { name: "Black Naga", scoville: 700000, min: 700, description: "Super hot Indian chilli with dark skin and exceptionally intense heat." },
+    { name: "Trinidad 7 Pod", scoville: 850000, min: 850, description: "Incredibly hot chilli, with a surprising sweetness and hint of spicy pineapple." },
+    { name: "Ghost Pepper", scoville: 1000000, min: 1000, description: "Also called Bhut Jolokia, hottest chilli in the world from 2006 - 2011." },
+    { name: "Carolina reaper", scoville: 1500000, min: 1500, description: "Certified super-hot, you need a death wish to even attempt eating this one." },
+    { name: "Brown Moruga Scorpion", scoville: 2000000, min: 2000, description: "This one will kill them." }
   ];
 
   const fmtAUD = new Intl.NumberFormat("en-AU", { style:"currency", currency:"AUD", maximumFractionDigits: 0 });
@@ -123,7 +124,10 @@
     for (const t of LADDER){
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08)">${t.name}</td>
+        <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08)">
+          <div style="font-weight:600">${t.name}</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px">${t.description}</div>
+        </td>
         <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:right">${fmtInt.format(t.scoville)}</td>
         <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:right">${fmtAUD.format(t.min)}</td>
       `;
@@ -152,6 +156,7 @@
     const { current, next } = getCurrentTier(total);
 
     document.getElementById("pepperName").textContent = current.name;
+    document.getElementById("pepperDescription").textContent = current.description;
     document.getElementById("scoville").textContent = fmtInt.format(current.scoville);
 
     if (next){
