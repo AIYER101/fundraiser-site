@@ -4,62 +4,48 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Donate — KPMG x ACT Wildlife</title>
-  <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.5}
-    header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:14px 16px}
-    nav{display:flex;gap:10px;flex-wrap:wrap}
-    nav a{color:#111;text-decoration:none;border:1px solid #eee;border-radius:12px;padding:8px 10px}
-    nav a:hover{border-color:#bbb}
-    main{max-width:900px;margin:0 auto;padding:22px 16px}
-    .card{border:1px solid #eee;border-radius:18px;padding:16px;margin:14px 0}
-    .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));align-items:start}
-    .button{
-      display:inline-block;text-decoration:none;color:#fff;background:#111;
-      padding:12px 16px;border-radius:14px;font-weight:700
-    }
-    .muted{color:#555}
-    img{max-width:100%;height:auto;border-radius:16px;border:1px solid #eee}
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="donate.html">Donate</a>
-    <a href="total.html">Live Total</a>
-  </nav>
-</header>
 
-<main>
-  <h1>Donate</h1>
-  <p class="muted">Use the Square link or scan the QR code.</p>
+<div class="nav">
+  <div class="container nav-inner">
+    <div class="badge">KPMG × ACT Wildlife</div>
+    <div class="nav-links">
+      <a class="pill" href="index.html">Home</a>
+      <a class="pill" href="donate.html">Donate</a>
+      <a class="pill" href="total.html">Live Total</a>
+    </div>
+  </div>
+</div>
 
-  <div class="grid">
+<div class="container">
+  <section class="hero" style="min-height:260px">
+    <img src="chilli.jpg" alt="Chillies background" />
+    <div class="hero-content">
+      <div class="kicker">Donate</div>
+      <div class="h1">Scan the QR or donate online</div>
+      <p class="lede">Every dollar increases the heat level 🌶️</p>
+      <a class="btn" href="https://square.link/u/RrZYGqFM" target="_blank" rel="noopener">Donate via Square ↗</a>
+    </div>
+  </section>
+
+  <div class="grid" style="margin-top:14px">
     <div class="card">
-      <h2>Donate via Square</h2>
-      <p>
-        <a class="button" href="https://square.link/u/RrZYGqFM" target="_blank" rel="noopener">
-          Donate Now ↗
-        </a>
-      </p>
-      <p class="muted">Paste your Square link into the code where indicated.</p>
+      <h2>QR Code</h2>
+      <p class="muted">Best for in-person donations.</p>
+      <img class="qr" src="qr.png" alt="Donation QR code" />
     </div>
 
     <div class="card">
-      <h2>Scan QR Code</h2>
-      <p class="muted">Add an image file named <b>qr.png</b> to the repo root.</p>
-      <img src="qr.png" alt="Donation QR code" />
-      <p class="muted">If you upload a different filename, update the src.</p>
+      <h2>Online link</h2>
+      <p class="muted">Tap to donate from your phone.</p>
+      <p><a class="btn" href="https://square.link/u/RrZYGqFM" target="_blank" rel="noopener">Open Square ↗</a></p>
+      <p class="muted" style="margin-top:10px">If your link changes, only update it in this file.</p>
     </div>
   </div>
 
-  <div class="card">
-    <h2>Note</h2>
-    <p class="muted">
-      If you’re donating in person, scanning the QR is fastest. Otherwise use the button above.
-    </p>
-  </div>
-</main>
+  <footer>© KPMG × ACT Wildlife Fundraiser</footer>
+</div>
 </body>
 </html>

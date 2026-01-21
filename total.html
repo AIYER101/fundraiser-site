@@ -1,154 +1,178 @@
-```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Live Total — Chilli Challenge</title>
-  <style>
-    * { box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; }
-    body { margin: 0; padding: 16px; max-width: 900px; margin-inline: auto; line-height: 1.45; }
-    header { position: sticky; top: 0; background: #fff; padding: 14px 0; border-bottom: 1px solid #eee; }
-    nav { display: flex; gap: 10px; flex-wrap: wrap; }
-    nav a { text-decoration: none; padding: 8px 10px; border: 1px solid #eee; border-radius: 12px; color: #111; }
-    nav a:hover { border-color: #bbb; }
-
-    .card { border: 1px solid #eee; border-radius: 16px; padding: 16px; margin: 14px 0; }
-    .muted { color: #555; }
-    .big { font-size: clamp(34px, 6vw, 56px); font-weight: 900; margin: 4px 0 10px; }
-    .bar { height: 14px; background: #f2f2f2; border-radius: 999px; overflow: hidden; }
-    .bar > div { height: 100%; width: 0%; background: #111; transition: width .6s ease; }
-
-    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); align-items: start; }
-    .pepper { font-size: clamp(30px, 4vw, 44px); font-weight: 900; }
-    ul { margin: 10px 0 0 18px; }
-    footer { padding: 18px 0; color: #666; text-align: center; border-top: 1px solid #eee; margin-top: 22px; }
-    .pill { display: inline-block; padding: 4px 10px; border: 1px solid #eee; border-radius: 999px; margin-left: 8px; font-size: 12px; color:#444;}
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="donate.html">Donate</a>
-    <a href="total.html">Live Total</a>
-  </nav>
-</header>
-
-<main>
-  <h1>KPMG x ACT Wildlife — Chilli Challenge <span class="pill" id="status">loading…</span></h1>
-
-  <div class="card">
-    <p class="muted">Last updated: <span id="updated">—</span></p>
-    <p class="big" id="total">$0</p>
-
-    <div class="bar" aria-label="Progress to goal"><div id="fill"></div></div>
-    <p class="muted">Goal: <span id="goalLabel">$5,000</span></p>
+<div class="nav">
+  <div class="container nav-inner">
+    <div class="badge">KPMG × ACT Wildlife</div>
+    <div class="nav-links">
+      <a class="pill" href="index.html">Home</a>
+      <a class="pill" href="donate.html">Donate</a>
+      <a class="pill" href="total.html">Live Total</a>
+    </div>
   </div>
+</div>
 
-  <div class="grid">
+<div class="container">
+  <section class="hero" style="min-height:280px">
+    <img src="chilli.jpg" alt="Chilli background" />
+    <div class="hero-content">
+      <div class="kicker">Live Total</div>
+      <div class="h1">Chilli Challenge Meter 🌶️</div>
+      <p class="lede">Auto-updating total + current pepper tier.</p>
+      <a class="btn" href="donate.html">Donate now →</a>
+      <span class="badge" id="status" style="margin-left:10px">loading…</span>
+    </div>
+  </section>
+
+  <div class="grid" style="margin-top:14px">
     <div class="card">
-      <h2>Current heat level</h2>
-      <div class="pepper" id="pepper">🌶️</div>
-      <p class="muted" id="pepperText">Warming up…</p>
+      <div class="muted">Last updated</div>
+      <div style="font-weight:800;margin-top:6px" id="updated">—</div>
+
+      <div class="muted" style="margin-top:14px">Total raised</div>
+      <div class="big-number" id="total">$0</div>
+
+      <div class="progress" aria-label="Progress"><div id="fill"></div></div>
+      <div class="muted" style="margin-top:10px">
+        Current tier progress: <span id="tierProgress">—</span>
+      </div>
     </div>
 
     <div class="card">
-      <h2>Chilli rules</h2>
-      <p class="muted">As the total increases, the organisers take on hotter peppers.</p>
-      <ul class="muted" id="rules"></ul>
+      <h2>Current pepper</h2>
+      <div style="font-size:36px;font-weight:900;margin-top:8px" id="pepperName">—</div>
+      <div class="muted" style="margin-top:6px">
+        Scoville: <b id="scoville">—</b>
+      </div>
+      <div class="muted" style="margin-top:10px">
+        Next target: <b id="nextTarget">—</b>
+      </div>
     </div>
   </div>
 
   <div class="card">
-    <h2>Want to raise the heat?</h2>
-    <p class="muted">Donate via Square on the Donate page.</p>
-    <p><a href="donate.html">Go to Donate →</a></p>
+    <h2>Full chilli ladder</h2>
+    <div class="muted">Donation milestones mapped to the Scoville scale.</div>
+    <div style="overflow:auto;margin-top:12px">
+      <table style="width:100%;border-collapse:collapse">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:10px;border-bottom:1px solid rgba(255,255,255,0.10)">Pepper</th>
+            <th style="text-align:right;padding:10px;border-bottom:1px solid rgba(255,255,255,0.10)">Scoville</th>
+            <th style="text-align:right;padding:10px;border-bottom:1px solid rgba(255,255,255,0.10)">Min donation</th>
+          </tr>
+        </thead>
+        <tbody id="ladder"></tbody>
+      </table>
+    </div>
   </div>
-</main>
 
-<footer>© KPMG x ACT Wildlife Fundraiser</footer>
+  <footer>© KPMG × ACT Wildlife Fundraiser</footer>
+</div>
 
 <script>
-  // ====== SETTINGS ======
-  const GOAL = 5000;          // change if you want a different target
-  const REFRESH_MS = 15000;   // refresh every 15 seconds
+  // Update frequency
+  const REFRESH_MS = 15000;
 
-  // Edit thresholds/labels here if you want:
-  const LEVELS = [
-    { min: 0,    emoji: "🌶️",                 label: "Mild" },
-    { min: 500,  emoji: "🌶️🌶️",              label: "Medium" },
-    { min: 1000, emoji: "🌶️🌶️🌶️",           label: "Hot" },
-    { min: 2000, emoji: "🌶️🌶️🌶️🌶️",        label: "Very hot" },
-    { min: 3500, emoji: "🌶️🌶️🌶️🌶️🌶️",     label: "Extreme" }
+  // Your exact ladder (min donation thresholds in AUD)
+  const LADDER = [
+    { name: "Capsicum", scoville: 0, min: 0 },
+    { name: "Jalapeno", scoville: 5000, min: 5 },
+    { name: "Chipotle Pepper", scoville: 10000, min: 10 },
+    { name: "Serrano Pepper", scoville: 23000, min: 23 },
+    { name: "Cayenne Pepper", scoville: 50000, min: 50 },
+    { name: "Birds Eye Chilli", scoville: 100000, min: 100 },
+    { name: "Jamaican Hot Pepper", scoville: 200000, min: 200 },
+    { name: "Habanero", scoville: 350000, min: 350 },
+    { name: "Chocolate Habanero", scoville: 450000, min: 450 },
+    { name: "Red Savina Habanero", scoville: 577000, min: 577 },
+    { name: "Black Naga", scoville: 700000, min: 700 },
+    { name: "Trinidad 7 Pod", scoville: 850000, min: 850 },
+    { name: "Ghost Pepper", scoville: 1000000, min: 1000 },
+    { name: "Carolina reaper", scoville: 1500000, min: 1500 },
+    { name: "Brown Moruga Scorpion", scoville: 2000000, min: 2000 }
   ];
 
-  // ====== HELPERS ======
-  const fmt = new Intl.NumberFormat("en-AU", {
-    style: "currency", currency: "AUD", maximumFractionDigits: 0
-  });
+  const fmtAUD = new Intl.NumberFormat("en-AU", { style:"currency", currency:"AUD", maximumFractionDigits: 0 });
+  const fmtInt = new Intl.NumberFormat("en-AU");
 
-  function getLevel(total) {
-    let current = LEVELS[0];
-    for (const lvl of LEVELS) if (total >= lvl.min) current = lvl;
-    return current;
+  function setStatus(txt){ document.getElementById("status").textContent = txt; }
+
+  function getCurrentTier(total){
+    let current = LADDER[0];
+    for (const tier of LADDER){
+      if (total >= tier.min) current = tier;
+    }
+    const idx = LADDER.indexOf(current);
+    const next = (idx + 1 < LADDER.length) ? LADDER[idx + 1] : null;
+    return { current, next, idx };
   }
 
-  function renderRules() {
-    const rules = document.getElementById("rules");
-    rules.innerHTML = "";
-    for (let i = 0; i < LEVELS.length; i++) {
-      const a = LEVELS[i].min;
-      const b = (i + 1 < LEVELS.length) ? LEVELS[i + 1].min - 1 : null;
-      const range = b === null ? `${fmt.format(a)}+` : `${fmt.format(a)}–${fmt.format(b)}`;
-      const li = document.createElement("li");
-      li.textContent = `${range}: ${LEVELS[i].label} ${LEVELS[i].emoji}`;
-      rules.appendChild(li);
+  function renderLadder(){
+    const tbody = document.getElementById("ladder");
+    tbody.innerHTML = "";
+    for (const t of LADDER){
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08)">${t.name}</td>
+        <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:right">${fmtInt.format(t.scoville)}</td>
+        <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:right">${fmtAUD.format(t.min)}</td>
+      `;
+      tbody.appendChild(tr);
     }
   }
 
-  async function fetchTotalJson() {
-    // cache buster ensures the browser doesn't reuse old JSON
-    const res = await fetch("./total.json?cb=" + Date.now(), { cache: "no-store" });
+  async function fetchTotal(){
+    const res = await fetch("./total.json?cb=" + Date.now(), { cache:"no-store" });
     if (!res.ok) throw new Error("Could not load total.json");
     return await res.json();
   }
 
-  function setStatus(text) {
-    const el = document.getElementById("status");
-    el.textContent = text;
-  }
+  function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
 
-  async function update() {
+  async function update(){
     setStatus("updating…");
-    const data = await fetchTotalJson();
-
+    const data = await fetchTotal();
     const total = Number(data.total || 0);
-    document.getElementById("total").textContent = fmt.format(total);
-    document.getElementById("goalLabel").textContent = fmt.format(GOAL);
 
-    const pct = Math.max(0, Math.min(100, (total / GOAL) * 100));
-    document.getElementById("fill").style.width = pct.toFixed(1) + "%";
+    document.getElementById("total").textContent = fmtAUD.format(total);
 
-    const lvl = getLevel(total);
-    document.getElementById("pepper").textContent = lvl.emoji;
-    document.getElementById("pepperText").textContent =
-      `${lvl.label} — keep donating to turn up the heat`;
-
-    const stamp = data.lastUpdated
-      ? new Date(data.lastUpdated).toLocaleString("en-AU")
-      : new Date().toLocaleString("en-AU");
+    const stamp = data.lastUpdated ? new Date(data.lastUpdated).toLocaleString("en-AU") : new Date().toLocaleString("en-AU");
     document.getElementById("updated").textContent = stamp;
+
+    const { current, next } = getCurrentTier(total);
+    document.getElementById("pepperName").textContent = current.name;
+    document.getElementById("scoville").textContent = fmtInt.format(current.scoville);
+
+    if (next){
+      document.getElementById("nextTarget").textContent = `${fmtAUD.format(next.min)} (${next.name})`;
+
+      // Tier progress (from current.min to next.min)
+      const span = next.min - current.min;
+      const into = total - current.min;
+      const pct = span > 0 ? clamp((into / span) * 100, 0, 100) : 100;
+      document.getElementById("fill").style.width = pct.toFixed(1) + "%";
+      document.getElementById("tierProgress").textContent = `${fmtAUD.format(total)} of ${fmtAUD.format(next.min)} → ${pct.toFixed(0)}%`;
+    } else {
+      // Max tier
+      document.getElementById("nextTarget").textContent = "MAX TIER REACHED 🔥";
+      document.getElementById("fill").style.width = "100%";
+      document.getElementById("tierProgress").textContent = "100% (top pepper unlocked)";
+    }
 
     setStatus("live");
   }
 
-  renderRules();
+  renderLadder();
   update().catch(err => { console.error(err); setStatus("error"); });
   setInterval(() => update().catch(err => { console.error(err); setStatus("error"); }), REFRESH_MS);
 </script>
-
 </body>
 </html>
-```

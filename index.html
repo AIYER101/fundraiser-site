@@ -4,74 +4,95 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KPMG x ACT Wildlife Fundraiser</title>
-  <style>
-    *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;line-height:1.5}
-    header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:14px 16px}
-    nav{display:flex;gap:10px;flex-wrap:wrap}
-    nav a{color:#111;text-decoration:none;border:1px solid #eee;border-radius:12px;padding:8px 10px}
-    nav a:hover{border-color:#bbb}
-    main{max-width:900px;margin:0 auto;padding:22px 16px}
-    .card{border:1px solid #eee;border-radius:18px;padding:16px;margin:14px 0}
-    .grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
-    .muted{color:#555}
-    footer{border-top:1px solid #eee;padding:20px 16px;text-align:center;color:#666}
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="donate.html">Donate</a>
-    <a href="total.html">Live Total</a>
-  </nav>
-</header>
 
-<main>
-  <h1>KPMG x ACT Wildlife Fundraiser</h1>
-  <p class="muted">
-    We’re raising funds to support ACT Wildlife. Every donation helps with rescue, rehabilitation,
-    and care for injured and orphaned native animals.
-  </p>
-
-  <div class="card">
-    <h2>Our mission</h2>
-    <p>
-      Our goal is to raise funds and awareness for ACT Wildlife’s work in the community.
-      Your contribution goes directly toward supporting wildlife rescue and rehabilitation efforts.
-    </p>
-  </div>
-
-  <div class="grid">
-    <div class="card">
-      <h3>About ACT Wildlife</h3>
-      <ul>
-        <li>Supports wildlife rescue and rehabilitation</li>
-        <li>Helps care for injured/orphaned native animals</li>
-        <li>Relies on community support and volunteers</li>
-      </ul>
-      <p class="muted">Replace these bullets with your final facts when ready.</p>
+<div class="nav">
+  <div class="container nav-inner">
+    <div class="badge">KPMG × ACT Wildlife</div>
+    <div class="nav-links">
+      <a class="pill" href="index.html">Home</a>
+      <a class="pill" href="donate.html">Donate</a>
+      <a class="pill" href="total.html">Live Total</a>
     </div>
+  </div>
+</div>
 
-    <div class="card">
-      <h3>Chilli Challenge</h3>
-      <p>
-        More donations = spicier pepper for the organisers 🌶️
+<div class="container">
+  <section class="hero">
+    <img src="hero.jpg" alt="Wildlife fundraiser hero image" />
+    <div class="hero-content">
+      <div class="kicker">Fundraiser</div>
+      <div class="h1">Help support ACT Wildlife — and turn up the heat 🌶️</div>
+      <p class="lede">
+        Every donation supports wildlife rescue and rehabilitation. As the total rises,
+        the organisers take on progressively hotter chillies.
       </p>
+      <a class="btn" href="donate.html">Donate now →</a>
+      <a class="pill" style="margin-left:10px" href="total.html">See the chilli meter</a>
+    </div>
+  </section>
+
+  <div class="grid" style="margin-top:14px">
+    <div class="card">
+      <h2>Our mission</h2>
       <p class="muted">
-        The Live Total page will show the current total and chilli level.
+        We’re raising funds to support ACT Wildlife’s work in the community — including rescue,
+        rehabilitation, care, and support for native animals.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>How it works</h2>
+      <p class="muted">
+        Donate through Square. The live total updates automatically.
+        The higher the total, the hotter the chilli challenge gets.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Get involved</h2>
+      <p class="muted">
+        Share the donation page, scan the QR at the event, and watch the organisers suffer (respectfully).
       </p>
     </div>
   </div>
 
-  <div class="card">
-    <h2>How to donate</h2>
-    <p>
-      Head to the <a href="donate.html">Donate</a> page to use the Square link or scan the QR code.
-    </p>
-  </div>
-</main>
+  <div class="split" style="margin-top:14px">
+    <div class="card">
+      <h2>About ACT Wildlife</h2>
+      <p class="muted">
+        Add your final facts here (short, punchy). If you want, you can include:
+      </p>
+      <ul class="muted">
+        <li>What ACT Wildlife does (rescue/rehab/community support)</li>
+        <li>Why donations matter (vet care, food, equipment)</li>
+        <li>Any key stats you want to highlight</li>
+      </ul>
+      <p class="muted">We can tighten this copy once you paste your final wording.</p>
+    </div>
 
-<footer>© KPMG x ACT Wildlife Fundraiser</footer>
+    <div class="photo">
+      <img src="wildlife1.jpg" alt="Wildlife photo" />
+    </div>
+  </div>
+
+  <div class="split" style="margin-top:14px">
+    <div class="photo">
+      <img src="wildlife2.jpg" alt="Wildlife photo 2" />
+    </div>
+    <div class="card">
+      <h2>Chilli Challenge</h2>
+      <p class="muted">
+        We’ll use real chilli tiers (Scoville scale) matched to donation milestones.
+        Check the live total page to see the current pepper and what’s next.
+      </p>
+      <a class="btn" href="total.html">Open Live Total →</a>
+    </div>
+  </div>
+
+  <footer>© KPMG × ACT Wildlife Fundraiser</footer>
+</div>
 </body>
 </html>
