@@ -1,3 +1,4 @@
+<!-- total.html -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -20,12 +21,13 @@
 </div>
 
 <div class="container">
+
   <section class="hero" style="min-height:280px">
     <img src="chilli.jpg" alt="Chilli background" />
     <div class="hero-content">
       <div class="kicker">Live Total</div>
       <div class="h1">Chilli Challenge Meter 🌶️</div>
-      <p class="lede">Auto-updating total + current pepper tier.</p>
+      <p class="lede">This updates automatically from Square → Zapier.</p>
       <a class="btn" href="donate.html">Donate now →</a>
       <span class="badge" id="status" style="margin-left:10px">loading…</span>
     </div>
@@ -39,7 +41,7 @@
       <div class="muted" style="margin-top:14px">Total raised</div>
       <div class="big-number" id="total">$0</div>
 
-      <div class="progress" aria-label="Progress"><div id="fill"></div></div>
+      <div class="progress" aria-label="Tier progress"><div id="fill"></div></div>
       <div class="muted" style="margin-top:10px">
         Current tier progress: <span id="tierProgress">—</span>
       </div>
@@ -59,7 +61,7 @@
 
   <div class="card">
     <h2>Full chilli ladder</h2>
-    <div class="muted">Donation milestones mapped to the Scoville scale.</div>
+    <div class="muted">Donation milestones mapped to Scoville heat units.</div>
     <div style="overflow:auto;margin-top:12px">
       <table style="width:100%;border-collapse:collapse">
         <thead>
@@ -78,7 +80,6 @@
 </div>
 
 <script>
-  // Update frequency
   const REFRESH_MS = 15000;
 
   // Your exact ladder (min donation thresholds in AUD)
@@ -104,6 +105,7 @@
   const fmtInt = new Intl.NumberFormat("en-AU");
 
   function setStatus(txt){ document.getElementById("status").textContent = txt; }
+  function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
 
   function getCurrentTier(total){
     let current = LADDER[0];
@@ -112,7 +114,7 @@
     }
     const idx = LADDER.indexOf(current);
     const next = (idx + 1 < LADDER.length) ? LADDER[idx + 1] : null;
-    return { current, next, idx };
+    return { current, next };
   }
 
   function renderLadder(){
@@ -135,8 +137,6 @@
     return await res.json();
   }
 
-  function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
-
   async function update(){
     setStatus("updating…");
     const data = await fetchTotal();
@@ -144,24 +144,27 @@
 
     document.getElementById("total").textContent = fmtAUD.format(total);
 
-    const stamp = data.lastUpdated ? new Date(data.lastUpdated).toLocaleString("en-AU") : new Date().toLocaleString("en-AU");
+    const stamp = data.lastUpdated
+      ? new Date(data.lastUpdated).toLocaleString("en-AU")
+      : new Date().toLocaleString("en-AU");
     document.getElementById("updated").textContent = stamp;
 
     const { current, next } = getCurrentTier(total);
+
     document.getElementById("pepperName").textContent = current.name;
     document.getElementById("scoville").textContent = fmtInt.format(current.scoville);
 
     if (next){
       document.getElementById("nextTarget").textContent = `${fmtAUD.format(next.min)} (${next.name})`;
 
-      // Tier progress (from current.min to next.min)
       const span = next.min - current.min;
       const into = total - current.min;
       const pct = span > 0 ? clamp((into / span) * 100, 0, 100) : 100;
+
       document.getElementById("fill").style.width = pct.toFixed(1) + "%";
-      document.getElementById("tierProgress").textContent = `${fmtAUD.format(total)} of ${fmtAUD.format(next.min)} → ${pct.toFixed(0)}%`;
+      document.getElementById("tierProgress").textContent =
+        `${fmtAUD.format(total)} of ${fmtAUD.format(next.min)} → ${pct.toFixed(0)}%`;
     } else {
-      // Max tier
       document.getElementById("nextTarget").textContent = "MAX TIER REACHED 🔥";
       document.getElementById("fill").style.width = "100%";
       document.getElementById("tierProgress").textContent = "100% (top pepper unlocked)";
@@ -174,5 +177,6 @@
   update().catch(err => { console.error(err); setStatus("error"); });
   setInterval(() => update().catch(err => { console.error(err); setStatus("error"); }), REFRESH_MS);
 </script>
+
 </body>
 </html>
