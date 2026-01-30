@@ -114,7 +114,7 @@
       : new Date().toLocaleString("en-AU");
     document.getElementById("updated").textContent = stamp;
 
-    setStatus("live");
+    setStatus("updated");
   }
 
   update().catch(err => { console.error(err); setStatus("error"); });
