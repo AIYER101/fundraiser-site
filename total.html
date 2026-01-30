@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Live Total — Chilli Challenge</title>
+  <title>Challenge Complete — Chilli Challenge</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -25,57 +25,65 @@
   <section class="hero" style="min-height:280px">
     <img src="chilli.jpg" alt="Chilli background" />
     <div class="hero-content">
-      <div class="kicker">Live Total</div>
-      <div class="h1">Chilli Challenge Meter 🌶️</div>
-      <p class="lede">This updates automatically 1-2 mins after you donate!</p>
-      <a class="btn" href="donate.html">Donate now →</a>
-      <span class="badge" id="status" style="margin-left:10px">loading…</span>
+      <div class="kicker">Final Total</div>
+      <div class="h1">Chilli Challenge Complete! 🌶️🔥</div>
+      <p class="lede">The challenge has concluded with the Carolina Reaper!</p>
+      <span class="badge" id="status" style="margin-top:10px">loading…</span>
     </div>
   </section>
 
+  <div class="card" style="margin-top:14px">
+    <h2>Thank You! 🙏</h2>
+    <p class="muted">
+      A huge thank you to all donors and everyone who participated in this fundraiser!
+      Your generosity has made a real difference for ACT Wildlife and the animals they care for.
+    </p>
+    <p class="muted" style="margin-top:14px">
+      The chilli challenge has officially concluded, and our brave organisers will be eating the
+      <b>Carolina Reaper</b> — one of the world's hottest peppers at 1,500,000 Scoville units!
+    </p>
+  </div>
+
   <div class="grid" style="margin-top:14px">
     <div class="card">
+      <h2>Final Total Raised</h2>
       <div class="muted">Last updated</div>
       <div style="font-weight:800;margin-top:6px" id="updated">—</div>
 
       <div class="muted" style="margin-top:14px">Total raised</div>
       <div class="big-number" id="total">$0</div>
-
-      <div class="progress" aria-label="Tier progress"><div id="fill"></div></div>
-      <div class="muted" style="margin-top:10px">
-        Current tier progress: <span id="tierProgress">—</span>
+      
+      <div class="muted" style="margin-top:14px">
+        Thank you for your incredible support!
       </div>
     </div>
 
     <div class="card">
-      <h2>Current pepper</h2>
-      <img id="pepperImage" src="" alt="Current pepper" style="width:100%;max-height:300px;object-fit:cover;border-radius:8px;margin-top:8px;margin-bottom:12px" />
-      <div style="font-size:36px;font-weight:900;margin-top:8px" id="pepperName">—</div>
-      <div style="margin-top:8px;font-size:14px;color:rgba(255,255,255,0.7)" id="pepperDescription">—</div>
-      <div class="muted" style="margin-top:6px">
-        Scoville: <b id="scoville">—</b>
+      <h2>Final Pepper: Carolina Reaper</h2>
+      <img src="photos/Carolina-Reaper-1024x768.jpg" alt="Carolina Reaper" style="width:100%;max-height:300px;object-fit:cover;border-radius:8px;margin-top:8px;margin-bottom:12px" />
+      <div style="font-size:36px;font-weight:900;margin-top:8px">Carolina Reaper</div>
+      <div style="margin-top:8px;font-size:14px;color:rgba(255,255,255,0.7)">
+        Certified super-hot, you need a death wish to even attempt eating this one.
       </div>
-      <div class="muted" style="margin-top:10px">
-        Next target: <b id="nextTarget">—</b>
+      <div class="muted" style="margin-top:6px">
+        Scoville: <b>1,500,000</b>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <h2>Full chilli ladder</h2>
-    <div class="muted">Donation milestones mapped to Scoville heat units.</div>
-    <div style="overflow:auto;margin-top:12px">
-      <table style="width:100%;border-collapse:collapse">
-        <thead>
-          <tr>
-            <th style="text-align:left;padding:10px;border-bottom:1px solid rgba(255,255,255,0.10)">Pepper</th>
-            <th style="text-align:right;padding:10px;border-bottom:1px solid rgba(255,255,255,0.10)">Scoville</th>
-            <th style="text-align:right;padding:10px;border-bottom:1px solid rgba(255,255,255,0.10)">Min donation</th>
-          </tr>
-        </thead>
-        <tbody id="ladder"></tbody>
-      </table>
+  <div class="card" style="margin-top:14px">
+    <h2>Join Us Today!</h2>
+    <p class="muted">
+      The chilli eating and ACT Wildlife presentation will take place today:
+    </p>
+    <div style="margin-top:14px">
+      <div style="font-size:22px;font-weight:900">📍 Level 8</div>
+      <div style="font-size:22px;font-weight:900;margin-top:8px">🕓 4:00 PM — January 30, 2026</div>
     </div>
+    <p class="muted" style="margin-top:14px">
+      Come watch the brave souls take on the Carolina Reaper and learn more about the amazing work
+      ACT Wildlife does for our native animals!
+    </p>
   </div>
 
   <footer>© KPMG × ACT Wildlife Fundraiser</footer>
@@ -84,57 +92,9 @@
 <script>
   const REFRESH_MS = 15000;
 
-  // Your exact ladder (min donation thresholds in AUD)
-  const LADDER = [
-    { name: "Capsicum", scoville: 0, min: 0, description: "Sweet and mild fruit, otherwise known as bell pepper.", image: "photos/images.jpg" },
-    { name: "Jalapeno", scoville: 5000, min: 5, description: "Classic Mexican pepper with moderate heat and great flavour.", image: "photos/types-of-jalapenos.png" },
-    { name: "Chipotle Pepper", scoville: 10000, min: 10, description: "Smoked jalapeno with a relatively mild but earthy spiciness.", image: "photos/chipotle.jpg" },
-    { name: "Serrano Pepper", scoville: 23000, min: 23, description: "Small but mighty Mexican pepper with a bright and biting flavour.", image: "photos/serano.jpg" },
-    { name: "Cayenne Pepper", scoville: 50000, min: 50, description: "Long, thin pepper known for its heat and spice.", image: "photos/cayenne.jpg" },
-    { name: "Birds Eye Chilli", scoville: 100000, min: 100, description: "Tiny Southeast Asian pepper packed with explosive heat and fruity notes.", image: "photos/Thai_peppers.jpg" },
-    { name: "Jamaican Hot Pepper", scoville: 200000, min: 200, description: "Stout Caribbean powerhouse with intense heat and sweetness.", image: "photos/pepper-jamaican-hot-yellow-shk-1.jpg" },
-    { name: "Habanero", scoville: 350000, min: 350, description: "Mexican pepper known for its intensely spicy and floral flavour.", image: "photos/Fresh-habanero-peppers_285641987-1-1024x972.jpg" },
-    { name: "Chocolate Habanero", scoville: 450000, min: 450, description: "Dark brown habanero bred to be even spicier then its derivative.", image: "photos/chocolate-habanero-1.jpg" },
-    { name: "Red Savina Habanero", scoville: 577000, min: 577, description: "Extremely hot breed of habenero; the hottest chilli in the world until 2006.", image: "photos/savina.jpg" },
-    { name: "Black Naga", scoville: 700000, min: 700, description: "Super hot Indian chilli with dark skin and exceptionally intense heat.", image: "photos/blacknaga01.jpg" },
-    { name: "Trinidad 7 Pod", scoville: 850000, min: 850, description: "Incredibly hot chilli, with a surprising sweetness and hint of spicy pineapple.", image: "photos/trinidad-7.jpg" },
-    { name: "Ghost Pepper", scoville: 1000000, min: 1000, description: "Also called Bhut Jolokia, hottest chilli in the world from 2006 - 2011.", image: "photos/ghost-pepper.jpg" },
-    { name: "Carolina reaper", scoville: 1500000, min: 1500, description: "Certified super-hot, you need a death wish to even attempt eating this one.", image: "photos/Carolina-Reaper-1024x768.jpg" },
-    { name: "Brown Moruga Scorpion", scoville: 2000000, min: 2000, description: "This one will end them.", image: "photos/Moruga_Scorpion_Mature_Chilli_Pod__18534.jpg" }
-  ];
-
   const fmtAUD = new Intl.NumberFormat("en-AU", { style:"currency", currency:"AUD", maximumFractionDigits: 0 });
-  const fmtInt = new Intl.NumberFormat("en-AU");
 
   function setStatus(txt){ document.getElementById("status").textContent = txt; }
-  function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
-
-  function getCurrentTier(total){
-    let current = LADDER[0];
-    for (const tier of LADDER){
-      if (total >= tier.min) current = tier;
-    }
-    const idx = LADDER.indexOf(current);
-    const next = (idx + 1 < LADDER.length) ? LADDER[idx + 1] : null;
-    return { current, next };
-  }
-
-  function renderLadder(){
-    const tbody = document.getElementById("ladder");
-    tbody.innerHTML = "";
-    for (const t of LADDER){
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08)">
-          <div style="font-weight:600">${t.name}</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px">${t.description}</div>
-        </td>
-        <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:right">${fmtInt.format(t.scoville)}</td>
-        <td style="padding:10px;border-bottom:1px solid rgba(255,255,255,0.08);text-align:right">${fmtAUD.format(t.min)}</td>
-      `;
-      tbody.appendChild(tr);
-    }
-  }
 
   async function fetchTotal(){
     const res = await fetch("./total.json?cb=" + Date.now(), { cache:"no-store" });
@@ -154,34 +114,9 @@
       : new Date().toLocaleString("en-AU");
     document.getElementById("updated").textContent = stamp;
 
-    const { current, next } = getCurrentTier(total);
-
-    document.getElementById("pepperName").textContent = current.name;
-    document.getElementById("pepperDescription").textContent = current.description;
-    document.getElementById("pepperImage").src = current.image;
-    document.getElementById("pepperImage").alt = current.name;
-    document.getElementById("scoville").textContent = fmtInt.format(current.scoville);
-
-    if (next){
-      document.getElementById("nextTarget").textContent = `${fmtAUD.format(next.min)} (${next.name})`;
-
-      const span = next.min - current.min;
-      const into = total - current.min;
-      const pct = span > 0 ? clamp((into / span) * 100, 0, 100) : 100;
-
-      document.getElementById("fill").style.width = pct.toFixed(1) + "%";
-      document.getElementById("tierProgress").textContent =
-        `${fmtAUD.format(total)} of ${fmtAUD.format(next.min)} → ${pct.toFixed(0)}%`;
-    } else {
-      document.getElementById("nextTarget").textContent = "MAX TIER REACHED 🔥";
-      document.getElementById("fill").style.width = "100%";
-      document.getElementById("tierProgress").textContent = "100% (top pepper unlocked)";
-    }
-
-    setStatus("live");
+    setStatus("updated");
   }
 
-  renderLadder();
   update().catch(err => { console.error(err); setStatus("error"); });
   setInterval(() => update().catch(err => { console.error(err); setStatus("error"); }), REFRESH_MS);
 </script>
